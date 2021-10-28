@@ -1,6 +1,4 @@
-package homework.arraychar;
-
-import java.util.Arrays;
+package homework.charutil;
 
 public class ArrayChar {
     public static void main(String[] args) {

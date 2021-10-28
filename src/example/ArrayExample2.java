@@ -2,23 +2,27 @@ package example;
 
 public class ArrayExample2 {
     public static void main(String[] args) {
-        int[] array = {3, 7, 8, 6, 12, 85, 66, 33, 42, 10};
-        int n = array.length;
-        int tmp = array[0];
-        array[0] = array[1];
-        array[1] = tmp;
-        for (int i = 0; i < n; i++) {
-            for (int j = 1; j < (n - i); j++) {
-                if (array[j - i] < array[j]) {
-                    tmp = array[j - 1];
-                    array[j - 1] = array[j];
-                    array[j] = tmp;
-
+        int[] array = {9, 4, 7, 9, 55, 22, 7, 75, 13, 55};
+        //տպել թե  որ էլեմենտներն է կրկնվում
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] == array[j]) {
+                    System.out.println(array[i] + "-ը կրկնվում է");
+                    break;
                 }
-                System.out.println(array[]);
             }
-
         }
-
+//        int[] array = {6, 4, 9, 7, 55, 22, 7, 75, 13, 55};
+//        //տպել true եթե մասիվի բոլոր էլեմենտները զույգ են
+//        // եթե ոչ false
+//        boolean a = true;
+//        for (int i = 0; i < array.length; i++) {
+//            if (array[i] % 2 != 0) {
+//                a = false;
+//                break;
+//                }
+//            }
+//        System.out.println( "մասսիվի բոլոր թվերը զույգ է " + a);
+//    }
     }
 }

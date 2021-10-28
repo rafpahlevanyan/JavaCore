@@ -16,8 +16,7 @@ public class ArrayUtil2 {
         System.out.println("max = " + max);
         int min = array[0];
         for (int i = 0; i < array.length; i++) {
-            if (array[i] < min) ;
-            {
+            if (array[i] < min) {
                 min = array[i];
             }
         }
@@ -50,7 +49,7 @@ public class ArrayUtil2 {
                 oddcount++;
             }
         }
-        System.out.println("cound of odd " + oddcount);
+        System.out.println("count of odd " + oddcount);
         double sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];

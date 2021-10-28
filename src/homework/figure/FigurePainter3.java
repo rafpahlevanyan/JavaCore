@@ -12,9 +12,6 @@ public class FigurePainter3 {
                 System.out.print("* ");
             }
             System.out.println();
-
-
-
         }
     }
 }
