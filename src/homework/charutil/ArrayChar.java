@@ -47,10 +47,6 @@ public class ArrayChar {
         System.out.println("firstindex = " + firstindex);
         System.out.print("lastindex = " + lastindex);
         System.out.println();
-//        char[] result = Arrays.copyOfRange(text, firstindex, lastindex + 1);
-//        for (int i = 0; i < result.length; i++) {
-//            System.out.print(result[i]);
-//        }
         char[] result = new char[lastindex-firstindex+1];
         for (int i = 0; i < result.length; i++) {
             result[i]=text[firstindex+i];

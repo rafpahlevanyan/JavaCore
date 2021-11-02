@@ -75,7 +75,7 @@ public class ArrayUtil {
     }
 
     void sum(int[] array) {
-        System.out.print("մասիվի թտվերի գումարը։ ");
+        System.out.print("մասիվի թվերի գումարը։ ");
         double sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
@@ -91,7 +91,8 @@ public class ArrayUtil {
         }
         System.out.println(avg / array.length);
     }
-    void sortminmax(int[] array){
+
+    void sortminmax(int[] array) {
         System.out.print("մասիվը սորտավորված փոքրից-մեծ։ ");
         for (int i = 0; i < array.length; i++) {
             for (int j = 1; j < array.length - i; j++) {
@@ -109,7 +110,8 @@ public class ArrayUtil {
         }
         System.out.println();
     }
-    void sortmaxmin(int[] array){
+
+    void sortmaxmin(int[] array) {
         System.out.print("մասիվը սորտավորված մեծից-փոքր։ ");
         for (int i = 0; i < array.length; i++) {
             for (int j = 1; j < array.length - i; j++) {

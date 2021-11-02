@@ -10,6 +10,12 @@ public class Box {
 //        System.out.println(width * depth * height);
 //
 //    }
+    Box(){
+        System.out.println("Koнcтpyиpoвaниe объекта Вох");
+        width = 10;
+        height = 10;
+        depth = 10;
+    }
     double volume() {
         return width * height * depth;
     }

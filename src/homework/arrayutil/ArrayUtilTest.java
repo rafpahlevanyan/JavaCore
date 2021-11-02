@@ -23,5 +23,6 @@ public class ArrayUtilTest {
         arrayUtil.avg(array);
         arrayUtil.sortminmax(array);
         arrayUtil.sortmaxmin(array);
+
     }
 }
