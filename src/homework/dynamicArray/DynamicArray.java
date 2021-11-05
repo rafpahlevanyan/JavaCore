@@ -1,7 +1,5 @@
 package homework.dynamicArray;
 
-import java.util.Stack;
-
 public class DynamicArray {
     //սա մե հիմնական մասիվն է, որտեղ պահելու ենք ավելացվող էլեմենտները
     private int[] array = new int[10];
@@ -35,7 +33,7 @@ public class DynamicArray {
     private void extend() {
         int[] newArray = new int[array.length + 10];
         System.arraycopy(array, 0, newArray, 0, array.length);
-//        for (int i = 0; i < array.length; i++) {
+ //     //   for (int i = 0; i < array.length; i++) {
 //            newArray[i] = array[i];
 //        }
         array = newArray;
