@@ -1,4 +1,4 @@
-package example;
+package classwork;
 
 public class SortArray2 {
     public static void main(String[] args) {

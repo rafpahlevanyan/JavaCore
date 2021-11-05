@@ -1,6 +1,4 @@
-package example;
-
-import java.util.Arrays;
+package classwork;
 
 public class SortArray {
     public static void main(String[] args) {
