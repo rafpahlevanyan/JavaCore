@@ -8,10 +8,11 @@ public class DynamicArray {
     //սա մեր մասիվի մեջ ավելացված էլեմենտների քանակն է
     private int size = 0;
 
-    public int getArrayLength(){
+    public int getArrayLength() {
         return array.length;
     }
-    public int getArraySize(){
+
+    public int getArraySize() {
         return size;
     }
 

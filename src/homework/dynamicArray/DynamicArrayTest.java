@@ -13,7 +13,7 @@ public class DynamicArrayTest {
         }
         System.out.println(da.getByIndex(12));
         System.out.println(da.getByIndex(14));
-        for (int i =0 ; i < 15; i++) {
+        for (int i = 0; i < 15; i++) {
             da.add(i);
         }
         da.print();
