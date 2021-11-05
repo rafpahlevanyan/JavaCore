@@ -1,7 +1,5 @@
 package homework.dynamicArray;
 
-import java.util.Arrays;
-
 public class DynamicArrayTest {
 
     public static void main(String[] args) {
