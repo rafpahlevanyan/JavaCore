@@ -11,8 +11,6 @@ public class BraceChecker {
     //Որ չկարողանանք BraceChecker-ի օբյեկտը սարքենք առանց text-տալու կոնստրուկտորի միջոցով․
     public BraceChecker(String brace) {
         text = brace;
-
-
     }
 
     //սա հիմնական մեթոդն է, որի մեջ գրելու ենք ամբողջ լոգիկան․ աշխատելու ենք թե stack-ի հետ, թե վերևի text-ի

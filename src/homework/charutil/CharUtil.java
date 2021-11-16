@@ -1,7 +1,7 @@
 package homework.charutil;
 
 public class CharUtil {
-    char[] trim(char[] text) {
+    public char[] trim(char[] text) {
         int firstindex = 0;
         int lastindex = text.length - 1;
 
