@@ -7,9 +7,6 @@ public class Author {
     private int age;
     private String gender;
 
-    public Author() {
-
-    }
 
     public Author(String name, String surname, String email, int age, String gender) {
         this.name = name;
@@ -17,6 +14,10 @@ public class Author {
         this.email = email;
         this.age = age;
         this.gender = gender;
+    }
+
+    public Author() {
+
     }
 
     public String getName() {
