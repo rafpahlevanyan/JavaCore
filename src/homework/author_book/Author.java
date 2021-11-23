@@ -1,4 +1,4 @@
-package homework.author;
+package homework.author_book;
 
 public class Author {
     private String name;
@@ -19,6 +19,7 @@ public class Author {
     public Author() {
 
     }
+
 
     public String getName() {
         return name;

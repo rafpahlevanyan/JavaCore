@@ -1,4 +1,4 @@
-package homework.author;
+package homework.author_book;
 
 public class AuthorStorage {
 
@@ -6,13 +6,21 @@ public class AuthorStorage {
     private int size = 0;
 
     AuthorStorage() {
-        array = new Author[10];
+        array = new Author[20];
     }
 
     public void add(Author author) {
         if (array.length == size) {
             extend();
         }
+        boolean IsFound = false;
+        for (int i = 0; i < size; i++) {
+            if (array[i].getEmail().equals(author.getEmail())) {
+                IsFound = true;
+                break;
+            }
+        }
+
         array[size++] = author;
     }
 
@@ -57,5 +65,16 @@ public class AuthorStorage {
         }
 
     }
+
+    public Author getByEmail(String email) {
+
+        for (int i = 0; i < size; i++) {
+            if (array[i].getEmail().equals(email)){
+                return array[i];
+            }
+        }
+        return null;
+    }
+
 }
 
