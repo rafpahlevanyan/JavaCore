@@ -2,32 +2,32 @@ package homework.author_book;
 
 public class AuthorStorage {
 
-    private Author[] array;
+    private Author[] authors;
     private int size = 0;
 
     AuthorStorage() {
-        array = new Author[20];
+        authors = new Author[20];
     }
 
     public void add(Author author) {
-        if (array.length == size) {
+        if (authors.length == size) {
             extend();
         }
         boolean IsFound = false;
         for (int i = 0; i < size; i++) {
-            if (array[i].getEmail().equals(author.getEmail())) {
+            if (authors[i].getEmail().equals(author.getEmail())) {
                 IsFound = true;
                 break;
             }
         }
 
-        array[size++] = author;
+        authors[size++] = author;
     }
 
     private void extend() {
-        Author[] tmp = new Author[array.length + (array.length / 2)];
-        System.arraycopy(array, 0, tmp, 0, array.length);
-        array = tmp;
+        Author[] tmp = new Author[authors.length + (authors.length / 2)];
+        System.arraycopy(authors, 0, tmp, 0, authors.length);
+        authors = tmp;
     }
 
 
@@ -36,21 +36,21 @@ public class AuthorStorage {
             System.err.println("invalid index: " + index);
             return null;
         }
-        return array[index];
+        return authors[index];
     }
 
 
     public void print() {
         for (int i = 0; i < size; i++) {
-            System.out.println(array[i] + " ");
+            System.out.println(authors[i] + " ");
         }
         System.out.println();
     }
 
     public void searchByName(String keyword) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getName().contains(keyword) || array[i].getSurname().contains(keyword)) {
-                System.out.println(array[i]);
+            if (authors[i].getName().contains(keyword) || authors[i].getSurname().contains(keyword)) {
+                System.out.println(authors[i]);
 
             }
 
@@ -59,22 +59,37 @@ public class AuthorStorage {
 
     public void searchByAge(int minAge, int maxAge) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getAge() > minAge && array[i].getAge() < maxAge) {
-                System.out.println(array[i]);
+            if (authors[i].getAge() > minAge && authors[i].getAge() < maxAge) {
+                System.out.println(authors[i]);
             }
         }
 
     }
+
 
     public Author getByEmail(String email) {
 
         for (int i = 0; i < size; i++) {
-            if (array[i].getEmail().equals(email)){
-                return array[i];
+            if (authors[i].getEmail().equals(email)){
+                return authors[i];
             }
         }
         return null;
     }
+
+    public void deleteAuthor(String email){
+        for (int i = 0; i < size; i++) {
+            if (authors[i].getEmail().equals(email)){
+                for (int j = i+1; j <size ; j++) {
+                    authors[j-1] = authors[j];
+                }
+            }
+            size--;
+            break;
+        }
+
+    }
+
 
 }
 

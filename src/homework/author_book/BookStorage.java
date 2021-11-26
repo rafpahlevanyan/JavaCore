@@ -24,17 +24,18 @@ public class BookStorage {
         System.out.println();
     }
 
-    public Book searchByTitle(String title){
+    public Book searchByTitle(String title) {
         for (int i = 0; i < size; i++) {
-            if (books[i].getTitle().contains(title)){
+            if (books[i].getTitle().contains(title)) {
                 return books[i];
             }
         }
         return null;
     }
+
     public void searchBookByAuthor(String email) {
         for (int i = 0; i < size; i++) {
-            if (books[i].getAuthor().getEmail().equals(email)){
+            if (books[i].getAuthor().getEmail().equals(email)) {
                 System.out.println(books[i]);
             }
         }
@@ -43,19 +44,43 @@ public class BookStorage {
     public int countBookByAuthor(String email) {
         int count = 0;
         for (int i = 0; i < size; i++) {
-            if (books[i].getAuthor().getEmail().equals(email)){
+            if (books[i].getAuthor().getEmail().equals(email)) {
                 count++;
             }
         }
         return count;
     }
-    public Book changeBookAuthor(String title){
+
+    public Book changeBookAuthor(String title) {
         for (int i = 0; i < size; i++) {
-            if (books[i].getTitle().equals(title)){
+            if (books[i].getTitle().equals(title)) {
                 return books[i];
             }
         }
         return null;
     }
 
+    public void deleteByAuthor(String email) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i]!=null && books[i].getAuthor().getEmail().equals(email)) {
+                for (int j = i + 1; j < size; j++) {
+                    books[j - 1] = books[j];
+
+                }
+            }
+            size--;
+        }
+    }
+
+    public void deleteBook(String title) {
+        for (int i = 0; i < size; i++) {
+            if (books[i].getTitle().equals(title)) {
+                for (int j = i + 1; j < size; j++) {
+                    books[j - 1] = books[j];
+                }
+            }
+            size--;
+            return;
+        }
+    }
 }

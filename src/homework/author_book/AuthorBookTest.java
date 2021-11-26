@@ -21,16 +21,27 @@ public class AuthorBookTest {
     private static final String COUNTS_BOOKS_BY_AUTHOR = "9";
     private static final String CHANGE_AUTHOR = "10";
     private static final String CHANGE_BOOK_AUTHOR = "11";
+    private static final String DELETE_AUTHOR = "12";
+    private static final String DELETE_BY_AUTHOR = "13";
+    private static final String DELETE_BOOK = "14";
 
 
     public static void main(String[] args) {
         authorStorage.add(new Author("poxos", "poxosyan", "poxos@mail.com", 25, "male"));
         authorStorage.add(new Author("armenuhi", "armenyan", "armenuhi@mail.com", 23, "female"));
         authorStorage.add(new Author("armen", "armenyan", "armen@mail.com", 27, "male"));
-
-//        bookStorage.add(new Book("Sasna crer", "epos", 10500, 2 , ));
-//        bookStorage.add(new Book("Vardananq", "epos", 9500, 4 ,"poxos@mail.ru"));
-//        bookStorage.add(new Book("Khenty", "drama", 11500, 3 ,"armen@mail.ru"));
+        Author author1 = new Author("Poxos", "Poxosyan", "poxos@mail.ru", 18, "male");
+        Author author = new Author("Petros", "Petrosyan", "petros@mail.ru", 20, "male");
+        bookStorage.add(new Book("samvel", "sdf", 7, 5, author));
+//        bookStorage.add(new Book("sdfsdf", "asdasd", 54, 54, author));
+//        bookStorage.add(new Book("sdfsdf", "asdasd", 54, 54, author));
+        bookStorage.add(new Book("qwe", "asdasd", 54, 54, author));
+        bookStorage.add(new Book("sdfrgerg", "sdfseg", 845, 85, author));
+//        bookStorage.add(new Book("sdfrgerg", "sdfseg", 845, 85, author1));
+//        bookStorage.add(new Book("sdfrgerg", "sdfseg", 845, 85, author1));
+//        bookStorage.add(new Book("zxc", "sdfseg", 845, 85, author1));
+//        bookStorage.add(new Book("cxz", "epos", 10500, 2 , author));
+//        bookStorage.add(new Book("asd", "ddd", 9500, 4 ,author1));
 
         boolean isRun = true;
         while (isRun) {
@@ -73,10 +84,43 @@ public class AuthorBookTest {
                 case CHANGE_BOOK_AUTHOR:
                     changeBookAuthor();
                     break;
+                case DELETE_AUTHOR:
+                    deleteAuthor();
+                    break;
+                case DELETE_BY_AUTHOR:
+                    deleteByAuthor();
+                    break;
+                case DELETE_BOOK:
+                    deleteBook();
+                    break;
                 default:
                     System.out.println("Invalid command!");
             }
         }
+    }
+
+    private static void deleteBook() {
+        System.out.println("Please input book title");
+        String title = scanner.nextLine();
+        Book book = bookStorage.searchByTitle(title);
+        bookStorage.deleteBook(title);
+        System.out.println("book was deleted");
+    }
+
+    private static void deleteByAuthor() {
+        System.out.println("Please input author email");
+        String email = scanner.nextLine();
+        Author author= authorStorage.getByEmail(email);
+        bookStorage.deleteByAuthor(email);
+        System.out.println("book was deleted");
+    }
+
+    private static void deleteAuthor() {
+        System.out.println("PLease input author email: ");
+        String email = scanner.nextLine();
+        Author author = authorStorage.getByEmail(email);
+        authorStorage.deleteAuthor(email);
+        System.out.println("Author was deleted");
     }
 
     private static void changeBookAuthor() {
@@ -198,6 +242,9 @@ public class AuthorBookTest {
         System.out.println("Please input " + COUNTS_BOOKS_BY_AUTHOR + " for print count of books ");
         System.out.println("Please input " + CHANGE_AUTHOR + " for change author  ");
         System.out.println("Please input " + CHANGE_BOOK_AUTHOR + " for change book  ");
+        System.out.println("Please input " + DELETE_AUTHOR + " for delete author :");
+        System.out.println("Please input " + DELETE_BY_AUTHOR + " for delete authors book :");
+        System.out.println("Please input " + DELETE_BOOK + " for delete book :");
     }
 
 
