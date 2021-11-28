@@ -1,13 +1,15 @@
 package homework.author_book;
 
 public class Book {
+    private String serialId;
     private String title;
     private String description;
     private double price;
     private int count;
     private Author author;
 
-    public Book(String title, String description, double price, int count, Author author) {
+    public Book(String serialId ,String title, String description, double price, int count, Author author) {
+        this.serialId = serialId;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -17,6 +19,14 @@ public class Book {
 
     public Book(){
 
+    }
+
+    public String getSerialId() {
+        return serialId;
+    }
+
+    public void setSerialId(String serialId) {
+        this.serialId = serialId;
     }
 
     public Author getAuthor() {
@@ -62,12 +72,42 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "serialId='" + serialId + '\'' +
+                ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", count=" + count +
                 ", author=" + author +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (Double.compare(book.price, price) != 0) return false;
+        if (count != book.count) return false;
+        if (serialId != null ? !serialId.equals(book.serialId) : book.serialId != null) return false;
+        if (title != null ? !title.equals(book.title) : book.title != null) return false;
+        if (description != null ? !description.equals(book.description) : book.description != null) return false;
+        return author != null ? author.equals(book.author) : book.author == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = serialId != null ? serialId.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + count;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        return result;
     }
 }
 
