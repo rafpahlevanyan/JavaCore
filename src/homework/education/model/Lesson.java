@@ -1,4 +1,4 @@
-package homework.education;
+package homework.education.model;
 
 public class Lesson {
     private String lessonName;
@@ -81,4 +81,3 @@ public class Lesson {
                 '}';
     }
 }
-

@@ -1,4 +1,7 @@
-package homework.education;
+package homework.education.model;
+
+
+import java.util.Date;
 
 public class Student {
     private String name;
@@ -6,14 +9,16 @@ public class Student {
     private int age;
     private String email;
     private String phoneNumber;
+    private Date dateOfBirth;
     private Lesson lesson;
 
-    public Student(String name, String surname, int age, String email, String phoneNumber, Lesson lesson) {
+    public Student(String name, String surname, int age, String email, String phoneNumber, Date dateOfBirth, Lesson lesson) {
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
         this.lesson = lesson;
     }
 
@@ -60,6 +65,14 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public Lesson getLesson() {
         return lesson;
     }
@@ -80,6 +93,7 @@ public class Student {
         if (surname != null ? !surname.equals(student.surname) : student.surname != null) return false;
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(student.phoneNumber) : student.phoneNumber != null) return false;
+        if (dateOfBirth != null ? !dateOfBirth.equals(student.dateOfBirth) : student.dateOfBirth != null) return false;
         return lesson != null ? lesson.equals(student.lesson) : student.lesson == null;
     }
 
@@ -90,6 +104,7 @@ public class Student {
         result = 31 * result + age;
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         result = 31 * result + (lesson != null ? lesson.hashCode() : 0);
         return result;
     }
@@ -102,6 +117,7 @@ public class Student {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth=" + homework.education.util.Date.dateToString(dateOfBirth)  +
                 ", lesson=" + lesson +
                 '}';
     }

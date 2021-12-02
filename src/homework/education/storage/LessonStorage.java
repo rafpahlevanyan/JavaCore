@@ -1,6 +1,7 @@
-package homework.education;
+package homework.education.storage;
 
-import homework.arrayutil.ArrayUtil;
+import homework.education.model.Lesson;
+import homework.education.util.Array;
 
 public class LessonStorage {
 
@@ -39,16 +40,14 @@ public class LessonStorage {
     public void deleteLessonByName(Lesson lesson) {
         for (int i = 0; i < size; i++) {
             if (lessons[i].getLessonName().equals(lesson)) {
-                for (int j = i + 1; j < size; j++) {
-                    lessons[j - 1] = lessons[j];
-                }
+                Array.deleteByIndex(lessons, i, size);
             }
             size--;
             return;
         }
     }
 
-    public boolean checkLessonExists() {
+    public boolean isEmpty() {
         for (int i = 0; i < size; i++) {
             if (lessons[i] != null) {
                 return true;

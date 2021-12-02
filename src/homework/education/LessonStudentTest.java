@@ -1,40 +1,26 @@
 package homework.education;
 
+import homework.education.model.Lesson;
+import homework.education.model.Student;
+import homework.education.storage.LessonStorage;
+import homework.education.storage.StudentStorage;
+import homework.education.util.Date;
+
+import java.text.ParseException;
 import java.util.Scanner;
 
-public class LessonStudentTest {
+public class LessonStudentTest implements LessonStudentCommands {
 
     static Scanner scanner = new Scanner(System.in);
     static LessonStorage lessonStorage = new LessonStorage();
     static StudentStorage studentStorage = new StudentStorage();
 
-    private static final String EXIT = "0";
-    private static final String ADD_LESSON = "1";
-    private static final String ADD_STUDENT = "2";
-    private static final String PRINT_STUDENT = "3";
-    private static final String SEARCH_STUDENT_BY_LESSON = "4";
-    private static final String PRINT_LESSONS = "5";
-    private static final String DELETE_LESSONS_BY_NAME = "6";
-    private static final String DELETE_STUDENTS_BY_EMAIL = "7";
 
-
-    private static void printCommands() {
-        System.out.println("Please input " + EXIT + " for exit");
-        System.out.println("Please input " + ADD_LESSON + " for add lesson ");
-        System.out.println("Please input " + ADD_STUDENT + " for add student ");
-        System.out.println("Please input " + PRINT_STUDENT + " for print student ");
-        System.out.println("Please input " + SEARCH_STUDENT_BY_LESSON + " for search student by lesson ");
-        System.out.println("Please input " + PRINT_LESSONS + " for print lesson ");
-        System.out.println("Please input " + DELETE_LESSONS_BY_NAME + " for delete lessons by name ");
-        System.out.println("Please input " + DELETE_STUDENTS_BY_EMAIL + " for delete students by email ");
-    }
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         boolean isRun = true;
         while (isRun) {
-            printCommands();
+            LessonStudentCommands.printCommands();
             String command = scanner.nextLine();
             switch (command) {
                 case EXIT:
@@ -106,9 +92,9 @@ public class LessonStudentTest {
         System.out.println("--------------------------");
     }
 
-    private static void addStudent() {
+    private static void addStudent() throws ParseException {
         printLessonsList();
-        if (lessonStorage.checkLessonExists()) {
+        if (lessonStorage.isEmpty()) {
             String lessonName = scanner.nextLine();
             Lesson lesson = lessonStorage.getByLessonName(lessonName);
             if (lesson != null) {
@@ -123,8 +109,10 @@ public class LessonStudentTest {
                     int age = Integer.parseInt(scanner.nextLine());
                     System.out.println("please input student phone number");
                     String phoneNumber = scanner.nextLine();
+                    System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
+                    java.util.Date date = Date.stringToDate(scanner.nextLine());
 
-                    Student student = new Student(name, surname, age, email, phoneNumber, lesson);
+                    Student student = new Student(name, surname, age, email, phoneNumber, date,lesson);
 
                     studentStorage.add(student);
                     System.out.println("Student was added");

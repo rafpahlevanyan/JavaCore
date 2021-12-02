@@ -1,4 +1,8 @@
-package homework.education;
+package homework.education.storage;
+
+import homework.education.model.Lesson;
+import homework.education.model.Student;
+import homework.education.util.Array;
 
 public class StudentStorage {
 
@@ -45,9 +49,7 @@ public class StudentStorage {
     public void deleteStudentByEmail(Student student) {
         for (int i = 0; i < size; i++) {
             if (students[i].getEmail().equals(student)) {
-                for (int j = i + 1; j < size; j++) {
-                    students[j - 1] = students[j];
-                }
+                Array.deleteByIndex(students, i, size);
             }
             size--;
             return;
