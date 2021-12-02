@@ -1,4 +1,4 @@
-package homework;
+package homework.practicHomework;
 
 public class PracticeHomeworkTest {
     public static void main(String[] args) {

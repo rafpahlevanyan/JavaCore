@@ -1,4 +1,4 @@
-package homework;
+package homework.practicHomework;
 
 public class PracticeHomework {
     long convert(int minutes) {
