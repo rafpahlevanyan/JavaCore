@@ -1,4 +1,8 @@
-package homework.author_book;
+package homework.author_book.storage;
+
+import homework.author_book.util.ArrayUtil;
+import homework.author_book.model.Author;
+import homework.author_book.model.Book;
 
 public class BookStorage {
     private Book[] books = new Book[10];

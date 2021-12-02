@@ -1,4 +1,8 @@
-package homework.author_book;
+package homework.author_book.model;
+
+import homework.author_book.util.DateUtil;
+
+import java.util.Date;
 
 public class Author {
     private String name;
@@ -6,20 +10,20 @@ public class Author {
     private String email;
     private int age;
     private String gender;
+    private Date dateOfBirth;
 
-
-    public Author(String name, String surname, String email, int age, String gender) {
+    public Author(String name, String surname, String email, int age, String gender, Date dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.age = age;
         this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Author() {
 
     }
-
 
     public String getName() {
         return name;
@@ -61,15 +65,12 @@ public class Author {
         this.gender = gender;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                '}';
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -83,7 +84,8 @@ public class Author {
         if (name != null ? !name.equals(author.name) : author.name != null) return false;
         if (surname != null ? !surname.equals(author.surname) : author.surname != null) return false;
         if (email != null ? !email.equals(author.email) : author.email != null) return false;
-        return gender != null ? gender.equals(author.gender) : author.gender == null;
+        if (gender != null ? !gender.equals(author.gender) : author.gender != null) return false;
+        return dateOfBirth != null ? dateOfBirth.equals(author.dateOfBirth) : author.dateOfBirth == null;
     }
 
     @Override
@@ -93,6 +95,19 @@ public class Author {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + age;
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
+        result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", gender='" + gender + '\'' +
+                ", dateOfBirth=" + DateUtil.dateToString(dateOfBirth) +
+                '}';
     }
 }

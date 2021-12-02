@@ -1,4 +1,4 @@
-package homework.author_book;
+package homework.author_book.model;
 
 public class Book {
     private String serialId;
