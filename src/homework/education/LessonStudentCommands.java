@@ -10,6 +10,7 @@ public interface LessonStudentCommands {
      String PRINT_LESSONS = "5";
      String DELETE_LESSONS_BY_NAME = "6";
      String DELETE_STUDENTS_BY_EMAIL = "7";
+     String CHANGE_LESSON = "8";
 
 
      static void printCommands() {
@@ -21,5 +22,6 @@ public interface LessonStudentCommands {
         System.out.println("Please input " + PRINT_LESSONS + " for print lesson ");
         System.out.println("Please input " + DELETE_LESSONS_BY_NAME + " for delete lessons by name ");
         System.out.println("Please input " + DELETE_STUDENTS_BY_EMAIL + " for delete students by email ");
+        System.out.println("Please input " + CHANGE_LESSON + " for change lesson ");
     }
 }

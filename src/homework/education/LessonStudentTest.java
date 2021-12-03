@@ -47,6 +47,9 @@ public class LessonStudentTest implements LessonStudentCommands {
                 case DELETE_STUDENTS_BY_EMAIL:
                     deleteStudentByEmail();
                     break;
+                case CHANGE_LESSON:
+                    changeLesson();
+                    break;
                 default:
                     System.err.println("invalid command");
             }
@@ -95,9 +98,18 @@ public class LessonStudentTest implements LessonStudentCommands {
     private static void addStudent() throws ParseException {
         printLessonsList();
         if (lessonStorage.isEmpty()) {
-            String lessonName = scanner.nextLine();
-            Lesson lesson = lessonStorage.getByLessonName(lessonName);
-            if (lesson != null) {
+            String lessonNamesString = scanner.nextLine();
+            String[] lessonNames = lessonNamesString.split(",");
+            Lesson[] lessonArray = new Lesson[lessonNames.length];
+            int foundLessons= 0;
+            for (String lessonName:lessonNames) {
+                Lesson lesson = lessonStorage.getByLessonName(lessonName);
+                if (lesson != null){
+                    lessonArray[foundLessons] = lesson;
+                    foundLessons++;
+                }
+            }
+            if (lessonArray[0] != null) {
                 System.out.println("Please input student email ");
                 String email = scanner.nextLine();
                 if (studentStorage.getByEmail(email) == null) {
@@ -112,7 +124,7 @@ public class LessonStudentTest implements LessonStudentCommands {
                     System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
                     java.util.Date date = Date.stringToDate(scanner.nextLine());
 
-                    Student student = new Student(name, surname, age, email, phoneNumber, date,lesson);
+                    Student student = new Student(name, surname, age, email, phoneNumber, date,lessonArray);
 
                     studentStorage.add(student);
                     System.out.println("Student was added");
@@ -159,6 +171,41 @@ public class LessonStudentTest implements LessonStudentCommands {
             studentStorage.searchByLesson(lesson);
         } else {
             System.err.println("lesson does not exists");
+        }
+    }
+
+    private static void changeLesson(){
+        System.out.println("PLease choose student email");
+        System.out.println("------------");
+        studentStorage.print();
+        System.out.println("------------");
+        String email = scanner.nextLine();
+
+        Student student = studentStorage.getByEmail(email);
+        if (student!= null){
+            printLessonsList();
+            System.out.println("Please input lesson for delete");
+            String lessonName = scanner.nextLine();
+            System.out.println("Please input lesson for add");
+            Lesson lesson = lessonStorage.getByLessonName(lessonName);
+            if(lesson != null){
+                String lessonNameStr = scanner.nextLine();
+                String[] lessonNames = lessonNameStr.split(",");
+                Lesson[] lessonArray = new Lesson[lessonNames.length];
+                int size = 0;
+                for (String lessonName1:lessonNames){
+                    Lesson lesson1 = lessonStorage.getByLessonName(lessonName1);
+                    if (lesson1 != null){
+                        lessonArray[size] = lesson1;
+                        size++;
+                    }
+                }
+                student.setLesson(lessonArray);
+            }else {
+                System.err.println("Lesson does not exists");
+            }
+        }else {
+            System.out.println("Student does not exists");
         }
     }
 }

@@ -1,6 +1,7 @@
 package homework.education.model;
 
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Student {
@@ -10,9 +11,9 @@ public class Student {
     private String email;
     private String phoneNumber;
     private Date dateOfBirth;
-    private Lesson lesson;
+    private Lesson[] lesson;
 
-    public Student(String name, String surname, int age, String email, String phoneNumber, Date dateOfBirth, Lesson lesson) {
+    public Student(String name, String surname, int age, String email, String phoneNumber, Date dateOfBirth, Lesson[] lesson) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -73,11 +74,12 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Lesson getLesson() {
+
+    public Lesson[] getLesson() {
         return lesson;
     }
 
-    public void setLesson(Lesson lesson) {
+    public void setLesson(Lesson[] lesson) {
         this.lesson = lesson;
     }
 
@@ -94,7 +96,8 @@ public class Student {
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (phoneNumber != null ? !phoneNumber.equals(student.phoneNumber) : student.phoneNumber != null) return false;
         if (dateOfBirth != null ? !dateOfBirth.equals(student.dateOfBirth) : student.dateOfBirth != null) return false;
-        return lesson != null ? lesson.equals(student.lesson) : student.lesson == null;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(lesson, student.lesson);
     }
 
     @Override
@@ -105,7 +108,7 @@ public class Student {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
         result = 31 * result + (dateOfBirth != null ? dateOfBirth.hashCode() : 0);
-        result = 31 * result + (lesson != null ? lesson.hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(lesson);
         return result;
     }
 
@@ -117,8 +120,8 @@ public class Student {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", dateOfBirth=" + homework.education.util.Date.dateToString(dateOfBirth)  +
-                ", lesson=" + lesson +
+                ", dateOfBirth=" + homework.education.util.Date.dateToString(dateOfBirth) +
+                ", lesson=" + Arrays.toString(lesson) +
                 '}';
     }
 }
