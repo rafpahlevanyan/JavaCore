@@ -100,48 +100,48 @@ public class LessonStudentTest implements LessonStudentCommands {
         if (lessonStorage.isEmpty()) {
             String lessonNamesString = scanner.nextLine();
             String[] lessonNames = lessonNamesString.split(",");
-            Lesson[] lessonArray = new Lesson[lessonNames.length];
-            int foundLessons= 0;
-            for (String lessonName:lessonNames) {
+            if (lessonNames.length == 0) {
+                System.err.println("Please choose lessons");
+                return;
+            }
+            Lesson[] lessons = new Lesson[lessonNames.length];
+            int foundLessons = 0;
+            for (String lessonName : lessonNames) {
                 Lesson lesson = lessonStorage.getByLessonName(lessonName);
-                if (lesson != null){
-                    lessonArray[foundLessons] = lesson;
-                    foundLessons++;
-                }
-            }
-            if (lessonArray[0] != null) {
-                System.out.println("Please input student email ");
-                String email = scanner.nextLine();
-                if (studentStorage.getByEmail(email) == null) {
-                    System.out.println("Please input student name ");
-                    String name = scanner.nextLine();
-                    System.out.println("PLease input student surname");
-                    String surname = scanner.nextLine();
-                    System.out.println("please input student age");
-                    int age = Integer.parseInt(scanner.nextLine());
-                    System.out.println("please input student phone number");
-                    String phoneNumber = scanner.nextLine();
-                    System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
-                    java.util.Date date = Date.stringToDate(scanner.nextLine());
+                if (lesson != null) {
+                    lessons[foundLessons++] = lesson;
 
-                    Student student = new Student(name, surname, age, email, phoneNumber, date,lessonArray);
-
-                    studentStorage.add(student);
-                    System.out.println("Student was added");
-                    System.out.println();
                 } else {
-                    System.err.println("Student with this email: " + email + " is exists");
+                    System.err.println("PLease input correct lesson name");
+                    return;
                 }
-
-            } else {
-                System.err.println("invalid lesson name , try again");
-                addStudent();
             }
-        } else {
-            addLesson();
-            addStudent();
+
+            System.out.println("Please input student email ");
+            String email = scanner.nextLine();
+            if (studentStorage.getByEmail(email) == null) {
+                System.out.println("Please input student name ");
+                String name = scanner.nextLine();
+                System.out.println("PLease input student surname");
+                String surname = scanner.nextLine();
+                System.out.println("please input student age");
+                int age = Integer.parseInt(scanner.nextLine());
+                System.out.println("please input student phone number");
+                String phoneNumber = scanner.nextLine();
+                System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
+                java.util.Date date = Date.stringToDate(scanner.nextLine());
+
+                Student student = new Student(name, surname, age, email, phoneNumber, date, lessons);
+
+                studentStorage.add(student);
+                System.out.println("Student was added");
+                System.out.println();
+            } else {
+                System.err.println("Student with this email: " + email + " is exists");
+            }
         }
     }
+
 
     private static void addLesson() {
         System.out.println("PLease input lesson name, duration, lecturer name, price");
@@ -174,38 +174,38 @@ public class LessonStudentTest implements LessonStudentCommands {
         }
     }
 
-    private static void changeLesson(){
+    private static void changeLesson() {
         System.out.println("PLease choose student email");
         System.out.println("------------");
         studentStorage.print();
         System.out.println("------------");
         String email = scanner.nextLine();
-
         Student student = studentStorage.getByEmail(email);
-        if (student!= null){
+        if (student != null) {
             printLessonsList();
-            System.out.println("Please input lesson for delete");
             String lessonName = scanner.nextLine();
-            System.out.println("Please input lesson for add");
-            Lesson lesson = lessonStorage.getByLessonName(lessonName);
-            if(lesson != null){
-                String lessonNameStr = scanner.nextLine();
-                String[] lessonNames = lessonNameStr.split(",");
-                Lesson[] lessonArray = new Lesson[lessonNames.length];
-                int size = 0;
-                for (String lessonName1:lessonNames){
-                    Lesson lesson1 = lessonStorage.getByLessonName(lessonName1);
-                    if (lesson1 != null){
-                        lessonArray[size] = lesson1;
-                        size++;
-                    }
-                }
-                student.setLesson(lessonArray);
-            }else {
-                System.err.println("Lesson does not exists");
+            String[] lessonArray = lessonName.split(",");
+            if (lessonArray.length == 0) {
+                System.err.println("Please choose lesson");
+                return;
             }
-        }else {
-            System.out.println("Student does not exists");
+            Lesson[] lessons = new Lesson[lessonArray.length];
+            int size = 0;
+            for (String lessonName1 : lessonArray) {
+                Lesson lesson1 = lessonStorage.getByLessonName(lessonName1);
+                if (lesson1 != null) {
+                    lessons[size++] = lesson1;
+                } else {
+                    System.err.println("Please input correct lesson");
+                    return;
+                }
+            }
+
+            student.setLesson(lessons);
+            System.out.println("Lessons was changed");
+        } else {
+            System.err.println("Student does not exists");
+            System.out.println();
         }
     }
 }
