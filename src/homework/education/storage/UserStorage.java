@@ -9,11 +9,11 @@ public class UserStorage {
     private User[] users = new User[20];
     private int size;
 
-    public void add(User student) {
+    public void add(User user) {
         if (size == users.length) {
             extend();
         }
-        users[size++] = student;
+        users[size++] = user;
     }
 
     private void extend() {

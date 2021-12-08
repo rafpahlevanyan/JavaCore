@@ -2,8 +2,12 @@ package homework.education;
 
 import homework.education.model.Lesson;
 import homework.education.model.Student;
+import homework.education.model.User;
+import homework.education.impl.LessonStudentCommands;
+import homework.education.impl.UserCommands;
 import homework.education.storage.LessonStorage;
 import homework.education.storage.StudentStorage;
+import homework.education.storage.UserStorage;
 import homework.education.util.Date;
 
 import java.text.ParseException;
@@ -14,14 +18,71 @@ public class LessonStudentTest implements LessonStudentCommands {
     static Scanner scanner = new Scanner(System.in);
     static LessonStorage lessonStorage = new LessonStorage();
     static StudentStorage studentStorage = new StudentStorage();
-
+    static UserStorage userStorage = new UserStorage();
 
     public static void main(String[] args) throws ParseException {
 
         boolean isRun = true;
         while (isRun) {
+            UserCommands.printCommands();
+            String command = scanner.nextLine();
+            switch (command) {
+                case EXIT:
+                    isRun = false;
+                    break;
+                case LOGIN:
+                    login();
+                    break;
+                case REGISTER:
+                    register();
+                    break;
+                default:
+                    System.err.println("invalid command");
+
+            }
+        }
+    }
+
+    private static void isUser() throws ParseException {
+        boolean isRun = true;
+        while (isRun) {
+            LessonStudentCommands.printCommandsUser();
+            String command = scanner.nextLine();
+
+
+            switch (command) {
+                case EXIT:
+                    isRun = false;
+                    break;
+                case ADD_LESSON:
+                    addLesson();
+                    break;
+                case ADD_STUDENT:
+                    addStudent();
+                    break;
+                case PRINT_STUDENT:
+                    studentStorage.print();
+                    break;
+                case SEARCH_STUDENT_BY_LESSON:
+                    searchStudentsByLesson();
+                    break;
+                case PRINT_LESSONS:
+                    lessonStorage.print();
+                    break;
+                default:
+                    System.err.println("invalid command");
+
+            }
+        }
+    }
+
+    private static void isAdmin() throws ParseException {
+        boolean isRun = true;
+        while (isRun) {
             LessonStudentCommands.printCommands();
             String command = scanner.nextLine();
+
+
             switch (command) {
                 case EXIT:
                     isRun = false;
@@ -54,6 +115,48 @@ public class LessonStudentTest implements LessonStudentCommands {
                     System.err.println("invalid command");
             }
         }
+    }
+
+
+    private static void login() throws ParseException {
+        System.out.println("Please enter your email");
+        String email = scanner.nextLine();
+        System.out.println("Please enter your password");
+        String password = scanner.nextLine();
+
+        User user = userStorage.checkUserExist(email, password);
+
+        if (user != null) {
+            switch (user.getType()) {
+                case ADMIN:
+                    isAdmin();
+                    break;
+                case USER:
+                    isUser();
+                    break;
+            }
+        } else {
+            System.err.println("User does not exist");
+            return;
+        }
+    }
+
+
+    private static void register() {
+        System.out.println("Please enter your email");
+        String email = scanner.nextLine();
+        System.out.println("Please enter your password");
+        String password = scanner.nextLine();
+        System.out.println("Please enter your name");
+        String name = scanner.nextLine();
+        System.out.println("Please enter your surname");
+        String surname = scanner.nextLine();
+        System.out.println("Please enter user type");
+        String type = scanner.nextLine();
+        userStorage.add(new User(name, surname, email, password, type));
+        System.out.println("You are registered");
+        System.out.println();
+
     }
 
 
