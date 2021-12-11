@@ -3,8 +3,6 @@ package homework.education;
 import homework.education.model.Lesson;
 import homework.education.model.Student;
 import homework.education.model.User;
-import homework.education.impl.LessonStudentCommands;
-import homework.education.impl.UserCommands;
 import homework.education.storage.LessonStorage;
 import homework.education.storage.StudentStorage;
 import homework.education.storage.UserStorage;
@@ -24,7 +22,7 @@ public class LessonStudentTest implements LessonStudentCommands {
 
         boolean isRun = true;
         while (isRun) {
-            UserCommands.printCommands();
+            LessonStudentCommands.printCommands();
             String command = scanner.nextLine();
             switch (command) {
                 case EXIT:
@@ -38,7 +36,6 @@ public class LessonStudentTest implements LessonStudentCommands {
                     break;
                 default:
                     System.err.println("invalid command");
-
             }
         }
     }
@@ -51,7 +48,7 @@ public class LessonStudentTest implements LessonStudentCommands {
 
 
             switch (command) {
-                case EXIT:
+                case LOG_OUT:
                     isRun = false;
                     break;
                 case ADD_LESSON:
@@ -79,9 +76,8 @@ public class LessonStudentTest implements LessonStudentCommands {
     private static void isAdmin() throws ParseException {
         boolean isRun = true;
         while (isRun) {
-            LessonStudentCommands.printCommands();
+            LessonStudentCommands.printCommandsAdmin();
             String command = scanner.nextLine();
-
 
             switch (command) {
                 case EXIT:
@@ -153,10 +149,15 @@ public class LessonStudentTest implements LessonStudentCommands {
         String surname = scanner.nextLine();
         System.out.println("Please enter user type");
         String type = scanner.nextLine();
-        userStorage.add(new User(name, surname, email, password, type));
-        System.out.println("You are registered");
-        System.out.println();
+        User user = userStorage.checkUserExist(email, password);
+        if (user == null) {
+            userStorage.add(new User(name, surname, email, password, type));
+            System.out.println("You are registered");
+        } else {
+            System.err.println("user is already exist");
+        }
 
+        System.out.println();
     }
 
 
