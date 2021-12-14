@@ -2,7 +2,7 @@ package homework.education.model;
 
 import java.util.Locale;
 
-public class User {
+public class User extends homework.author_book.model.User {
 
     private String name;
     private String surname;

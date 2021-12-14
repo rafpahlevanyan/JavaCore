@@ -149,15 +149,21 @@ public class LessonStudentTest implements LessonStudentCommands {
         String surname = scanner.nextLine();
         System.out.println("Please enter user type");
         String type = scanner.nextLine();
-        User user = userStorage.checkUserExist(email, password);
-        if (user == null) {
-            userStorage.add(new User(name, surname, email, password, type));
-            System.out.println("You are registered");
+        if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
+            User user = userStorage.checkUserExist(email, password);
+            if (user == null) {
+                userStorage.add(new User(name, surname, email, password, type));
+                System.out.println("You are registered");
+            } else {
+                System.err.println("user is already exist");
+            }
         } else {
-            System.err.println("user is already exist");
+            System.out.println("Type is invalid");
+
         }
 
         System.out.println();
+
     }
 
 
