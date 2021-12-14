@@ -1,7 +1,7 @@
 package homework.author_book;
 
 
-import homework.author_book.exeptions.BookNotFoundException;
+import homework.author_book.exceptions.BookNotFoundException;
 import homework.author_book.model.Author;
 import homework.author_book.model.Book;
 import homework.author_book.model.User;
@@ -124,7 +124,8 @@ public class AuthorBookTest implements AuthorBookCommands {
             String password = scanner.nextLine();
             System.out.println("Please input type 'admin or user ' ");
             String type = scanner.nextLine();
-            if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
+            if (type.equalsIgnoreCase("admin") ||
+                    type.equalsIgnoreCase("user")) {
                 User user = new User();
                 user.setEmail(email);
                 user.setName(name);

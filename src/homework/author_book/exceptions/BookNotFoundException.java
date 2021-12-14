@@ -1,4 +1,4 @@
-package homework.author_book.exeptions;
+package homework.author_book.exceptions;
 
 public class BookNotFoundException extends Exception{
 

@@ -1,6 +1,6 @@
 package homework.author_book.storage;
 
-import homework.author_book.exeptions.BookNotFoundException;
+import homework.author_book.exceptions.BookNotFoundException;
 import homework.author_book.util.ArrayUtil;
 import homework.author_book.model.Author;
 import homework.author_book.model.Book;

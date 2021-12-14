@@ -1,5 +1,6 @@
 package homework.education;
 
+import homework.education.exception.UserNotFoundException;
 import homework.education.model.Lesson;
 import homework.education.model.Student;
 import homework.education.model.User;
@@ -18,7 +19,7 @@ public class LessonStudentTest implements LessonStudentCommands {
     static StudentStorage studentStorage = new StudentStorage();
     static UserStorage userStorage = new UserStorage();
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
 
         boolean isRun = true;
         while (isRun) {
@@ -40,7 +41,7 @@ public class LessonStudentTest implements LessonStudentCommands {
         }
     }
 
-    private static void isUser() throws ParseException {
+    private static void isUser() {
         boolean isRun = true;
         while (isRun) {
             LessonStudentCommands.printCommandsUser();
@@ -73,7 +74,7 @@ public class LessonStudentTest implements LessonStudentCommands {
         }
     }
 
-    private static void isAdmin() throws ParseException {
+    private static void isAdmin() {
         boolean isRun = true;
         while (isRun) {
             LessonStudentCommands.printCommandsAdmin();
@@ -114,26 +115,25 @@ public class LessonStudentTest implements LessonStudentCommands {
     }
 
 
-    private static void login() throws ParseException {
+    private static void login() {
         System.out.println("Please enter your email");
         String email = scanner.nextLine();
-        System.out.println("Please enter your password");
-        String password = scanner.nextLine();
-
-        User user = userStorage.checkUserExist(email, password);
-
-        if (user != null) {
-            switch (user.getType()) {
-                case ADMIN:
+        User byEmail = null;
+        try {
+            byEmail = userStorage.getByEmail(email);
+            System.out.println("Please input password");
+            String password = scanner.nextLine();
+            if (byEmail.getPassword().equals(password)) {
+                if (byEmail.getType().equalsIgnoreCase("admin")) {
                     isAdmin();
-                    break;
-                case USER:
+                } else if (byEmail.getType().equalsIgnoreCase("user")) {
                     isUser();
-                    break;
+                }
+            } else {
+                System.err.println("Password is wrong");
             }
-        } else {
-            System.err.println("User does not exist");
-            return;
+        } catch (UserNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -141,29 +141,27 @@ public class LessonStudentTest implements LessonStudentCommands {
     private static void register() {
         System.out.println("Please enter your email");
         String email = scanner.nextLine();
-        System.out.println("Please enter your password");
-        String password = scanner.nextLine();
-        System.out.println("Please enter your name");
-        String name = scanner.nextLine();
-        System.out.println("Please enter your surname");
-        String surname = scanner.nextLine();
-        System.out.println("Please enter user type");
-        String type = scanner.nextLine();
-        if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
-            User user = userStorage.checkUserExist(email, password);
-            if (user == null) {
+        try {
+            userStorage.getByEmail(email);
+            System.err.println("User does not exists");
+        } catch (UserNotFoundException e) {
+
+            System.out.println("Please enter your password");
+            String password = scanner.nextLine();
+            System.out.println("Please enter your name");
+            String name = scanner.nextLine();
+            System.out.println("Please enter your surname");
+            String surname = scanner.nextLine();
+            System.out.println("Please enter user type");
+            String type = scanner.nextLine();
+            if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
                 userStorage.add(new User(name, surname, email, password, type));
                 System.out.println("You are registered");
             } else {
-                System.err.println("user is already exist");
+                System.err.println("Type is invalid");
+
             }
-        } else {
-            System.out.println("Type is invalid");
-
         }
-
-        System.out.println();
-
     }
 
 
@@ -205,7 +203,7 @@ public class LessonStudentTest implements LessonStudentCommands {
         System.out.println("--------------------------");
     }
 
-    private static void addStudent() throws ParseException {
+    private static void addStudent() {
         printLessonsList();
         if (lessonStorage.isEmpty()) {
             String lessonNamesString = scanner.nextLine();
@@ -239,7 +237,13 @@ public class LessonStudentTest implements LessonStudentCommands {
                 System.out.println("please input student phone number");
                 String phoneNumber = scanner.nextLine();
                 System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
-                java.util.Date date = Date.stringToDate(scanner.nextLine());
+                java.util.Date date = null;
+                try {
+                    date = Date.stringToDate(scanner.nextLine());
+                } catch (ParseException e) {
+                    System.out.println("Invalid date format, please input this format 'dd,mm,yyyy' ");
+                    return;
+                }
 
                 Student student = new Student(name, surname, age, email, phoneNumber, date, lessons);
 
