@@ -9,10 +9,10 @@ public class Author {
     private String surname;
     private String email;
     private int age;
-    private String gender;
+    private Gender gender;
     private Date dateOfBirth;
 
-    public Author(String name, String surname, String email, int age, String gender, Date dateOfBirth) {
+    public Author(String name, String surname, String email, int age, Gender gender, Date dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -57,11 +57,11 @@ public class Author {
         this.age = age;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
