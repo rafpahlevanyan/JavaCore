@@ -3,6 +3,7 @@ package homework.education;
 import homework.education.exception.UserNotFoundException;
 import homework.education.model.Lesson;
 import homework.education.model.Student;
+import homework.education.model.Type;
 import homework.education.model.User;
 import homework.education.storage.LessonStorage;
 import homework.education.storage.StudentStorage;
@@ -10,6 +11,7 @@ import homework.education.storage.UserStorage;
 import homework.education.util.Date;
 
 import java.text.ParseException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class LessonStudentTest implements LessonStudentCommands {
@@ -118,15 +120,14 @@ public class LessonStudentTest implements LessonStudentCommands {
     private static void login() {
         System.out.println("Please enter your email");
         String email = scanner.nextLine();
-        User byEmail = null;
         try {
-            byEmail = userStorage.getByEmail(email);
+            User byEmail = userStorage.getByEmail(email);
             System.out.println("Please input password");
             String password = scanner.nextLine();
             if (byEmail.getPassword().equals(password)) {
-                if (byEmail.getType().equalsIgnoreCase("admin")) {
+                if (byEmail.getType() == Type.ADMIN) {
                     isAdmin();
-                } else if (byEmail.getType().equalsIgnoreCase("user")) {
+                } else if (byEmail.getType() == Type.USER) {
                     isUser();
                 }
             } else {
@@ -152,15 +153,23 @@ public class LessonStudentTest implements LessonStudentCommands {
             String name = scanner.nextLine();
             System.out.println("Please enter your surname");
             String surname = scanner.nextLine();
-            System.out.println("Please enter user type");
-            String type = scanner.nextLine();
-            if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
+            System.out.println("Please enter user type exm 'ADMIN or USER' ");
+            try {
+                Type type = Type.valueOf(scanner.nextLine().toUpperCase(Locale.ROOT));
                 userStorage.add(new User(name, surname, email, password, type));
-                System.out.println("You are registered");
-            } else {
-                System.err.println("Type is invalid");
-
+                System.out.println("you are registered");
+            } catch (IllegalArgumentException a) {
+                System.out.println(a.getMessage());
             }
+
+//            String type = scanner.nextLine();
+//            if (type.equalsIgnoreCase("admin") || type.equalsIgnoreCase("user")) {
+//                userStorage.add(new User(name, surname, email, password, type));
+//                System.out.println("You are registered");
+//            } else {
+//                System.err.println("Type is invalid");
+//
+//            }
         }
     }
 
@@ -237,7 +246,7 @@ public class LessonStudentTest implements LessonStudentCommands {
                 System.out.println("please input student phone number");
                 String phoneNumber = scanner.nextLine();
                 System.out.println("please input student date of birth  'dd.mm.yyyy'    ");
-                java.util.Date date = null;
+                java.util.Date date;
                 try {
                     date = Date.stringToDate(scanner.nextLine());
                 } catch (ParseException e) {

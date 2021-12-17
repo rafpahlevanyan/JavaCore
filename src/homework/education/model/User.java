@@ -1,23 +1,20 @@
 package homework.education.model;
 
-import java.util.Locale;
 
-public class User extends homework.author_book.model.User {
+public class User {
 
     private String name;
     private String surname;
     private String email;
     private String password;
-    private String type;
+    private Type type;
 
-
-    public User(String name, String surname, String email, String password, String type) {
+    public User(String name, String surname, String email, String password, Type type) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.type = type.toUpperCase(Locale.ROOT);
-
+        this.type = type;
     }
 
     public User() {
@@ -55,11 +52,11 @@ public class User extends homework.author_book.model.User {
         this.password = password;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -74,7 +71,7 @@ public class User extends homework.author_book.model.User {
         if (surname != null ? !surname.equals(user.surname) : user.surname != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        return type != null ? type.equals(user.type) : user.type == null;
+        return type == user.type;
     }
 
     @Override
@@ -94,7 +91,7 @@ public class User extends homework.author_book.model.User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 '}';
     }
 }

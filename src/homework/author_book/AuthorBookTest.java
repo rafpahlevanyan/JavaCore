@@ -264,9 +264,8 @@ public class AuthorBookTest implements AuthorBookCommands {
         bookStorage.print();
         System.out.println("--------");
         String serialId = scanner.nextLine();
-        Book book = null;
         try {
-            book = bookStorage.getBySerialId(serialId);
+           Book book = bookStorage.getBySerialId(serialId);
 
             System.out.println("Please input tags separate  ' , ' ");
             String tagsStr = scanner.nextLine();
@@ -300,7 +299,7 @@ public class AuthorBookTest implements AuthorBookCommands {
             Author author = new Author("poxos", "poxosyan", "poxos@mail.com",
                     22, "male", DateUtil.stringToDate("12.03.2000"));
             authorStorage.add(author);
-//       authorStorage.add(new Author("poxosuhi", "poxosyan", "poxosuhi@mail.com", 23, "female"));
+//      authorStorage.add(new Author("poxosuhi", "poxosyan", "poxosuhi@mail.com", 23, "female"));
 //        authorStorage.add(new Author("petros", "petrosyan", "petros@mail.com", 25, "male"));
 
             Author[] authors = {author};
@@ -330,9 +329,8 @@ public class AuthorBookTest implements AuthorBookCommands {
         bookStorage.print();
         System.out.println("--------");
         String serialId = scanner.nextLine();
-        Book book = null;
         try {
-            book = bookStorage.getBySerialId(serialId);
+          Book  book = bookStorage.getBySerialId(serialId);
             bookStorage.delete(book);
         } catch (BookNotFoundException e) {
             System.out.println(e.getMessage());
@@ -364,9 +362,8 @@ public class AuthorBookTest implements AuthorBookCommands {
         bookStorage.print();
         System.out.println("--------");
         String serialId = scanner.nextLine();
-        Book book = null;
         try {
-            book = bookStorage.getBySerialId(serialId);
+           Book book = bookStorage.getBySerialId(serialId);
             printAuthorsList();
             String emails = scanner.nextLine();
             String[] emailArray = emails.split(",");

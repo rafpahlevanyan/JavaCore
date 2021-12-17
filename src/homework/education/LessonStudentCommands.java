@@ -6,8 +6,6 @@ public interface LessonStudentCommands {
     String EXIT = "0";
     String LOGIN = "1";
     String REGISTER = "2";
-    String ADMIN = "ADMIN";
-    String USER = "USER";
 
 
     String LOG_OUT = "0";
