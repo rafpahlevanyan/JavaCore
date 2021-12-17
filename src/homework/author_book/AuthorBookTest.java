@@ -303,7 +303,9 @@ public class AuthorBookTest implements AuthorBookCommands {
             Author author = new Author("poxos", "poxosyan", "poxos@mail.com",
                     22, Gender.MALE, DateUtil.stringToDate("12.03.2000"));
             authorStorage.add(author);
-//      authorStorage.add(new Author("poxosuhi", "poxosyan", "poxosuhi@mail.com", 23, "female"));
+            Author author1 = new Author("poxosuhi","poxosyan","poxosuhi@mail.ru",52, Gender.FEMALE,
+                    DateUtil.stringToDate("23.05.1995"));
+      authorStorage.add(author1);
 //        authorStorage.add(new Author("petros", "petrosyan", "petros@mail.com", 25, "male"));
 
             Author[] authors = {author};
